@@ -5,6 +5,15 @@ class PredictRequest(BaseModel):
     smiles: str = Field(..., min_length=1, description="SMILES string")
 
 
+class MolblockRequest(BaseModel):
+    smiles: str = Field(..., min_length=1, description="SMILES string")
+
+
+class MolblockResponse(BaseModel):
+    smiles: str
+    molblock: str
+
+
 class DescriptorResponse(BaseModel):
     molecular_weight: float
     logp: float

@@ -1,8 +1,13 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.schemas import PredictRequest, PredictResponse
-from app.chemistry import compute_descriptors
+from app.schemas import (
+    PredictRequest,
+    PredictResponse,
+    MolblockRequest,
+    MolblockResponse,
+)
+from app.chemistry import compute_descriptors, generate_molblock
 from app.model import mock_predict_property
 
 app = FastAPI(title="Molecular Property API", version="0.1.0")
@@ -35,6 +40,21 @@ async def predict(request: PredictRequest):
             "valid": True,
             "descriptors": descriptors,
             "prediction": prediction,
+        }
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    except Exception:
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+
+@app.post("/molblock", response_model=MolblockResponse)
+async def molblock(request: MolblockRequest):
+    """Generate a 3D molblock from a SMILES string for 3D visualization."""
+    try:
+        mol_block = generate_molblock(request.smiles)
+        return {
+            "smiles": request.smiles,
+            "molblock": mol_block,
         }
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))

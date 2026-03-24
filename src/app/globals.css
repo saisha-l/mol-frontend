@@ -1,0 +1,95 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0b1020;
+  color: #e8ecf3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.card {
+  background: #151b2f;
+  border: 1px solid #2a3354;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #33406b;
+  background: #0f1528;
+  color: #fff;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #6d8cff;
+  color: white;
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 800px) {
+  .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #b8c2dc;
+}
+
+.error {
+  color: #ff8e8e;
+  margin-top: 10px;
+}
+
+.muted {
+  color: #aeb7d0;
+}
+
+.viewer-box {
+  min-height: 220px;
+  border: 1px dashed #42507f;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d1427;
+  padding: 16px;
+  text-align: center;
+}

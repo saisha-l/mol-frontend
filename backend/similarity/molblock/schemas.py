@@ -1,9 +1,9 @@
+from pydantic import BaseModel, Field
 from typing import Optional
 
-from pydantic import BaseModel, Field
 
+# ── Requests ──────────────────────────────────────────────────────────────────
 
-# Requests
 class PredictRequest(BaseModel):
     smiles: str = Field(..., min_length=1, description="SMILES string")
 
@@ -28,7 +28,8 @@ class SimilarityRequest(BaseModel):
     limit: int = Field(10, ge=1, le=25)
 
 
-# Sub-schemas
+# ── Sub-schemas ────────────────────────────────────────────────────────────────
+
 class DescriptorResponse(BaseModel):
     molecular_weight: float
     logp: float
@@ -46,6 +47,7 @@ class PredictionOutput(BaseModel):
 
 class AdmetResponse(BaseModel):
     smiles: str
+    # Physicochemical
     molecular_weight: float
     logp: float
     tpsa: float
@@ -58,15 +60,18 @@ class AdmetResponse(BaseModel):
     heavy_atom_count: int
     molar_refractivity: float
     num_stereocenters: int
+    # Rule filters
     ro5_violations: int
     ro5_pass: bool
     veber_pass: bool
     egan_pass: bool
     ghose_pass: bool
+    # ADMET flags
     bbb_penetrant: bool
     herg_risk: bool
     pains_alerts: list[str]
     num_pains_alerts: int
+    # Estimates
     synthetic_accessibility: float
     solubility_log_mol_l: float
     drug_likeness_score: float
@@ -106,7 +111,8 @@ class SimilarityResponse(BaseModel):
     results: list[SimilarCompound]
 
 
-# Legacy
+# ── Legacy ─────────────────────────────────────────────────────────────────────
+
 class MolblockResponse(BaseModel):
     smiles: str
     molblock: str

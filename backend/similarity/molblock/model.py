@@ -3,6 +3,7 @@ def mock_predict_property(descriptors: dict) -> dict:
     Placeholder for a real ML model.
     This produces a simple heuristic score so the full stack works now.
     """
+
     score = (
         0.25 * descriptors["logp"]
         + 0.01 * descriptors["molecular_weight"]
